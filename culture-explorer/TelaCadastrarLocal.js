@@ -9,19 +9,25 @@ import {
   StatusBar,
   Alert,
 } from 'react-native';
-import { styles, Colors } from './Styles'; // 🔴 IMPORTANTE: importando os estilos
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { styles, Colors } from './Styles';
 
-// ─── Categorias ──────────────────────────────────────────────────────────────
+// Categorias com ícones reais
 const CATEGORIES = [
-  { label: 'Teatro', emoji: '🎭' },
-  { label: 'Cinema', emoji: '🎬' },
-  { label: 'Museu', emoji: '🏛️' },
-  { label: 'Evento', emoji: '🎉' },
-  { label: 'Show', emoji: '🎵' },
+  { label: 'Teatro', icon: 'drama-masks' },
+  { label: 'Cinema', icon: 'movie-open-outline' },
+  { label: 'Museu', icon: 'bank-outline' },
+  { label: 'Evento', icon: 'party-popper' },
+  { label: 'Show', icon: 'music' },
 ];
 
-// ─── Ícones ──────────────────────────────────────────────────────────────────
-const IconImage = () => <Text style={{ fontSize: 28, opacity: 0.4 }}>🖼️</Text>;
+const IconImage = () => (
+  <MaterialCommunityIcons
+    name="image-outline"
+    size={32}
+    color="rgba(255,255,255,0.35)"
+  />
+);
 
 export default function CadastrarLocalScreen({ navigation }) {
   const [nome, setNome] = useState('');
@@ -44,55 +50,48 @@ export default function CadastrarLocalScreen({ navigation }) {
       Alert.alert('Atenção', 'A localização é obrigatória.');
       return;
     }
-    Alert.alert('Sucesso', `Local "${nome}" cadastrado com sucesso!`);
-    // Limpar formulário
-    setNome('');
-    setDescricao('');
-    setLocalizacao('');
-    setSelectedCategory('Teatro');
-    setHasImage(false);
+
+    Alert.alert('Sucesso', `Local "${nome}" cadastrado!`);
   };
 
   const handleCancelar = () => {
-    if (navigation) {
-      navigation.goBack();
-    } else {
-      setNome('');
-      setDescricao('');
-      setLocalizacao('');
-      setSelectedCategory('Teatro');
-      setHasImage(false);
-      Alert.alert('Formulário limpo');
-    }
+    navigation?.goBack();
   };
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor={Colors.bg} />
-      
+
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View style={styles.scrollContent}>
-          
-          {/* Upload de imagem */}
-          <TouchableOpacity style={styles.uploadZone} onPress={handlePickImage} activeOpacity={0.7}>
+
+          {/* Upload */}
+          <TouchableOpacity style={styles.uploadZone} onPress={handlePickImage}>
             {hasImage ? (
               <>
-                <Text style={styles.uploadImagedText}>✅ Imagem selecionada</Text>
+                <Text style={styles.uploadImagedText}>Imagem selecionada</Text>
                 <Text style={styles.uploadText}>Toque para trocar</Text>
               </>
             ) : (
               <>
                 <IconImage />
-                <Text style={styles.uploadText}>📸 Toque para adicionar imagem</Text>
-                <Text style={styles.uploadSubtext}>JPG, PNG até 5MB</Text>
+                <Text style={styles.uploadTextRow}>
+                  <Text style={styles.uploadHighlight}>Toque para adicionar</Text>
+                  <Text style={styles.uploadText}> imagem</Text>
+                </Text>
+                <Text style={styles.uploadSubtext}>JPG, PNG · Máx 10MB</Text>
               </>
             )}
           </TouchableOpacity>
 
-          {/* Campo Nome */}
+          {/* Nome */}
           <Text style={styles.fieldLabel}>NOME *</Text>
           <View style={styles.inputRow}>
-            <Text style={styles.inputIcon}>📍</Text>
+            <MaterialCommunityIcons
+              name="map-marker-outline"
+              size={18}
+              color="rgba(255,255,255,0.5)"
+            />
             <TextInput
               style={styles.textInput}
               placeholder="Ex: Teatro Municipal"
@@ -102,25 +101,32 @@ export default function CadastrarLocalScreen({ navigation }) {
             />
           </View>
 
-          {/* Campo Descrição */}
+          {/* Descrição */}
           <Text style={styles.fieldLabel}>DESCRIÇÃO</Text>
           <View style={[styles.inputRow, styles.inputRowMultiline]}>
-            <Text style={styles.inputIcon}>📄</Text>
+            <MaterialCommunityIcons
+              name="file-document-outline"
+              size={18}
+              color="rgba(255,255,255,0.5)"
+            />
             <TextInput
               style={[styles.textInput, styles.textInputMultiline]}
-              placeholder="Descreva o local, horários, valores..."
+              placeholder="Descreva o local cultural..."
               placeholderTextColor="rgba(255,255,255,0.4)"
               multiline
-              numberOfLines={3}
               value={descricao}
               onChangeText={setDescricao}
             />
           </View>
 
-          {/* Campo Localização */}
+          {/* Localização */}
           <Text style={styles.fieldLabel}>LOCALIZAÇÃO *</Text>
           <View style={styles.inputRow}>
-            <Text style={styles.inputIcon}>📍</Text>
+            <MaterialCommunityIcons
+              name="map-marker-outline"
+              size={18}
+              color="rgba(255,255,255,0.5)"
+            />
             <TextInput
               style={styles.textInput}
               placeholder="Endereço completo"
@@ -133,44 +139,47 @@ export default function CadastrarLocalScreen({ navigation }) {
           {/* Categoria */}
           <Text style={styles.fieldLabel}>CATEGORIA</Text>
           <View style={styles.chipsRow}>
-            {CATEGORIES.map((item) => (
-              <TouchableOpacity
-                key={item.label}
-                style={[
-                  styles.chip,
-                  selectedCategory === item.label && styles.chipActive,
-                ]}
-                onPress={() => setSelectedCategory(item.label)}
-              >
-                <Text style={[
-                  styles.chipText,
-                  selectedCategory === item.label && styles.chipTextActive,
-                ]}>
-                  {item.emoji} {item.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
+            {CATEGORIES.map((item) => {
+              const isActive = selectedCategory === item.label;
+
+              return (
+                <TouchableOpacity
+                  key={item.label}
+                  style={[styles.chip, isActive && styles.chipActive]}
+                  onPress={() => setSelectedCategory(item.label)}
+                >
+                  <MaterialCommunityIcons
+                    name={item.icon}
+                    size={14}
+                    color={isActive ? Colors.accent : 'rgba(255,255,255,0.6)'}
+                    style={{ marginRight: 6 }}
+                  />
+                  <Text
+                    style={[
+                      styles.chipText,
+                      isActive && styles.chipTextActive,
+                    ]}
+                  >
+                    {item.label}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
 
           <View style={styles.divider} />
 
-          {/* Botão Cadastrar */}
-          <TouchableOpacity 
-            style={styles.btnGreen} 
-            onPress={handleCadastrar}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.btnGreenText}>Cadastrar Local</Text>
+          {/* Botão */}
+          <TouchableOpacity style={styles.btnGreen} onPress={handleCadastrar}>
+            <MaterialCommunityIcons name="check" size={18} color="#fff" />
+            <Text style={styles.btnGreenText}> Cadastrar Local</Text>
           </TouchableOpacity>
 
-          {/* Botão Cancelar */}
-          <TouchableOpacity 
-            style={styles.btnOutline} 
-            onPress={handleCancelar}
-          >
+          {/* Cancelar */}
+          <TouchableOpacity style={styles.btnOutline} onPress={handleCancelar}>
             <Text style={styles.btnOutlineText}>Cancelar</Text>
           </TouchableOpacity>
-          
+
         </View>
       </ScrollView>
     </SafeAreaView>
