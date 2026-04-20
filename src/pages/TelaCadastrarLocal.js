@@ -182,6 +182,6 @@ export default function CadastrarLocalScreen({ navigation }) {
 
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView> 
   );
 }

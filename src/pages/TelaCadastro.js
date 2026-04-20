@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { styles, Colors } from '../../Styles';
+import { styles, Colors } from '../Styles';
 
 export default function TelaCadastroScreen({ navigation }) {
   const [email, setEmail] = useState('');
