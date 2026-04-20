@@ -148,6 +148,44 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.7)',
     fontWeight: '600',
   },
+  // Cadastro
+avatarWrapper: {
+  alignItems: 'center',
+  marginBottom: 14,
+},
+avatarBox: {
+  width: 72,
+  height: 72,
+  borderRadius: 20,
+  backgroundColor: 'rgba(255,255,255,0.07)',
+  borderWidth: 1,
+  borderColor: 'rgba(255,255,255,0.13)',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+tagline: {
+  textAlign: 'center',
+  color: 'rgba(240,244,255,0.55)',
+  fontSize: 13,
+  marginBottom: 20,
+},
+taglineHighlight: {
+  color: '#38bdf8',
+  fontWeight: '700',
+},
+card: {
+  backgroundColor: 'rgba(255,255,255,0.07)',
+  borderWidth: 1,
+  borderColor: 'rgba(255,255,255,0.13)',
+  borderRadius: 18,
+  padding: 18,
+},
+cardTitle: {
+  color: '#fff',
+  textAlign: 'center',
+  marginBottom: 16,
+  fontWeight: '700',
+},
 });
 
 export { styles, Colors };
