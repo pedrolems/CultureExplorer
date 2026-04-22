@@ -1,6 +1,30 @@
 import { StyleSheet } from 'react-native';
 
-const Colors = {
+// ─── TOKENS DE COR ────────────────────────────────────────────────
+export const C = {
+  bg: '#080c14',
+  surface: 'rgba(255,255,255,0.07)',
+  border: 'rgba(255,255,255,0.12)',
+  blue: '#2563eb',
+  blueSoft: 'rgba(37,99,235,0.25)',
+  accent: '#38bdf8',
+  accentSoft: 'rgba(56,189,248,0.15)',
+  teal: '#0d9488',
+  purple: '#6366f1',
+  purpleSoft: 'rgba(99,102,241,0.25)',
+  green: '#10b981',
+  greenSoft: 'rgba(16,185,129,0.2)',
+  red: '#ef4444',
+  redSoft: 'rgba(239,68,68,0.15)',
+  star: '#f59e0b',
+  text: '#f0f4ff',
+  muted: 'rgba(240,244,255,0.5)',
+  hint: 'rgba(240,244,255,0.25)',
+  divider: 'rgba(255,255,255,0.08)',
+};
+
+// Alias para compatibilidade com TelaLogin/Cadastro/CadastrarLocal
+export const Colors = {
   bg: '#080c14',
   accent: '#38bdf8',
   text: '#f0f4ff',
@@ -17,12 +41,410 @@ const Colors = {
   divider: 'rgba(255,255,255,0.08)',
 };
 
-const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: Colors.bg },
+export const styles = StyleSheet.create({
 
+  // ── GERAL ──────────────────────────────────────────────────────
+  safeArea: { flex: 1, backgroundColor: C.bg },
+  scrollArea: {
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+  },
+  glassCard: {
+    backgroundColor: C.surface,
+    borderWidth: 0.5,
+    borderColor: C.border,
+    borderRadius: 18,
+    padding: 14,
+  },
+  sectionTitle: {
+    color: C.muted,
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    marginBottom: 10,
+    marginTop: 4,
+  },
+  iconBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: C.surface,
+    borderWidth: 0.5,
+    borderColor: C.border,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyState: {
+    alignItems: 'center',
+    paddingVertical: 48,
+    gap: 10,
+  },
+  emptyText: {
+    color: C.muted,
+    fontSize: 14,
+  },
+  emptyBtn: {
+    marginTop: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: C.accentSoft,
+    borderRadius: 12,
+    borderWidth: 0.5,
+    borderColor: C.accent + '55',
+  },
+
+  // ── HEADER / TOPO ──────────────────────────────────────────────
+  headerGradient: {
+    backgroundColor: '#0a1628',
+    paddingBottom: 0,
+  },
+  topBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 18,
+    paddingTop: 12,
+    paddingBottom: 8,
+  },
+  topBarTitle: {
+    color: C.text,
+    fontSize: 16,
+    fontWeight: '700',
+    letterSpacing: 0.2,
+  },
+  backBtn: {
+    width: 36,
+    height: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  // ── PERFIL (compartilhado) ─────────────────────────────────────
+  profileCenter: {
+    alignItems: 'center',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+  },
+  avatarRing: {
+    borderWidth: 3,
+    borderRadius: 100,
+    padding: 3,
+    marginBottom: 12,
+  },
+  profileName: {
+    color: C.text,
+    fontSize: 20,
+    fontWeight: '800',
+    letterSpacing: -0.3,
+    marginBottom: 4,
+  },
+  profileHandle: {
+    color: C.muted,
+    fontSize: 13,
+    marginBottom: 16,
+  },
+
+  // ── STATS ──────────────────────────────────────────────────────
+  statsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: C.surface,
+    borderWidth: 0.5,
+    borderColor: C.border,
+    borderRadius: 16,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    gap: 20,
+    width: '100%',
+  },
+  statCard: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  statValue: {
+    color: C.text,
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  statLabel: {
+    color: C.muted,
+    fontSize: 11,
+    marginTop: 2,
+  },
+  statDivider: {
+    width: 0.5,
+    height: 30,
+    backgroundColor: C.border,
+  },
+
+  // ── ADMIN BADGE ────────────────────────────────────────────────
+  adminBadge: {
+    backgroundColor: 'rgba(139,92,246,0.2)',
+    borderWidth: 0.5,
+    borderColor: 'rgba(139,92,246,0.4)',
+    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 5,
+    marginBottom: 14,
+  },
+  adminBadgeText: {
+    color: '#a78bfa',
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.5,
+  },
+
+  // ── TABS (VisitorProfile) ──────────────────────────────────────
+  tabRow: {
+    flexDirection: 'row',
+    borderTopWidth: 0.5,
+    borderTopColor: C.border,
+    marginTop: 8,
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  tabActive: {
+    borderBottomWidth: 2,
+    borderBottomColor: C.accent,
+  },
+  tabText: {
+    color: C.muted,
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  tabTextActive: {
+    color: C.accent,
+  },
+
+  // ── REVIEW CARDS (VisitorProfile) ──────────────────────────────
+  reviewLocalName: {
+    color: C.text,
+    fontSize: 14,
+    fontWeight: '700',
+    marginBottom: 4,
+  },
+  reviewDate: {
+    color: C.hint,
+    fontSize: 11,
+  },
+  reviewComment: {
+    color: C.muted,
+    fontSize: 13,
+    fontStyle: 'italic',
+    lineHeight: 18,
+  },
+  reviewActions: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 4,
+  },
+  reviewActionBtn: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    borderWidth: 0.5,
+    borderColor: C.border,
+  },
+
+  // ── ADMIN LOCAIS ───────────────────────────────────────────────
+  adminLocalRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  adminLocalIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    backgroundColor: C.surface,
+    borderWidth: 0.5,
+    borderColor: C.border,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  adminLocalName: {
+    color: C.text,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  statusBadge: {
+    borderRadius: 20,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  adminActions: {
+    marginTop: 8,
+  },
+  adminDivider: {
+    height: 0.5,
+    backgroundColor: C.border,
+    marginBottom: 10,
+  },
+  actionBtn: {
+    borderWidth: 0.5,
+    borderRadius: 10,
+    paddingVertical: 8,
+    alignItems: 'center',
+  },
+
+  // ── MINI CARDS (AdminProfile) ──────────────────────────────────
+  miniCard: {
+    backgroundColor: C.surface,
+    borderWidth: 0.5,
+    borderColor: C.border,
+    borderRadius: 14,
+    padding: 12,
+    alignItems: 'center',
+  },
+
+  // ── CTA BUTTON (AdminProfile) ──────────────────────────────────
+  ctaBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: C.blue,
+    borderRadius: 14,
+    paddingVertical: 14,
+    gap: 8,
+    marginBottom: 20,
+    shadowColor: C.blue,
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    elevation: 6,
+  },
+  ctaIcon: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '700',
+  },
+  ctaText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 14,
+    letterSpacing: 0.5,
+  },
+
+  // ── SETTINGS (AdminProfile) ────────────────────────────────────
+  settingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 4,
+  },
+  settingLabel: {
+    flex: 1,
+    color: C.text,
+    fontSize: 14,
+  },
+
+  // ── FEED PRINCIPAL ─────────────────────────────────────────────
+  feedContainer: {
+    flex: 1,
+    backgroundColor: '#0B1220',
+    paddingTop: 40,
+    paddingHorizontal: 16,
+  },
+  feedHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  feedBoasVindas: {
+    color: '#AAB0C0',
+    fontSize: 14,
+  },
+  feedTitulo: {
+    color: '#FFF',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  feedBotaoBusca: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#1A2238',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  feedIcone: {
+    fontSize: 18,
+  },
+  feedCategorias: {
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+  feedCategoria: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1A2238',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+  feedCategoriaAtiva: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1E90FF',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+  feedCard: {
+    backgroundColor: '#1A2238',
+    borderRadius: 16,
+    marginBottom: 16,
+    overflow: 'hidden',
+  },
+  feedCardImagem: {
+    width: '100%',
+    height: 160,
+  },
+  feedCardInfo: {
+    padding: 12,
+  },
+  feedCardTitulo: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  feedCardLocal: {
+    color: '#AAB0C0',
+    fontSize: 13,
+    marginBottom: 6,
+  },
+  feedCardAvaliacao: {
+    color: '#FFD700',
+    fontSize: 13,
+  },
+  feedInputBusca: {
+    backgroundColor: '#1A2238',
+    color: '#FFFFFF',
+    padding: 12,
+    borderRadius: 12,
+    marginBottom: 20,
+  },
+  feedAvatarBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: C.blue,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  // ── TELA CADASTRAR LOCAL ───────────────────────────────────────
   scrollView: { flex: 1 },
   scrollContent: { padding: 18 },
-
   uploadZone: {
     borderWidth: 2,
     borderStyle: 'dashed',
@@ -34,19 +456,16 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: 18,
   },
-
   uploadTextRow: { fontSize: 13 },
   uploadHighlight: { color: Colors.accent, fontWeight: '600' },
   uploadText: { color: 'rgba(255,255,255,0.4)' },
   uploadSubtext: { color: 'rgba(255,255,255,0.35)', fontSize: 11 },
   uploadImagedText: { color: Colors.green, fontWeight: '600' },
-
   fieldLabel: {
     color: Colors.textMuted,
     fontSize: 11,
     marginBottom: 6,
   },
-
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -59,29 +478,24 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     gap: 10,
   },
-
   inputRowMultiline: {
     alignItems: 'flex-start',
     minHeight: 80,
   },
-
   textInput: {
     flex: 1,
     color: Colors.text,
     fontSize: 13,
   },
-
   textInputMultiline: {
     minHeight: 60,
   },
-
   chipsRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
     marginBottom: 20,
   },
-
   chip: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -92,28 +506,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
   },
-
   chipActive: {
     backgroundColor: Colors.chipActiveBg,
     borderColor: Colors.chipActiveBorder,
   },
-
   chipText: {
     color: 'rgba(255,255,255,0.7)',
     fontSize: 11,
     fontWeight: '600',
   },
-
   chipTextActive: {
     color: Colors.accent,
   },
-
   divider: {
     height: 1,
     backgroundColor: Colors.divider,
     marginBottom: 18,
   },
-
   btnGreen: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -128,14 +537,12 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 6,
   },
-
   btnGreenText: {
     color: '#fff',
     fontWeight: '700',
     fontSize: 14,
     letterSpacing: 0.8,
   },
-
   btnOutline: {
     borderRadius: 14,
     paddingVertical: 13,
@@ -143,19 +550,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.25)',
   },
-
   btnOutlineText: {
     color: 'rgba(255,255,255,0.7)',
     fontWeight: '600',
   },
 
-  // ===== PARTE DE CADASTRO (adicionada sem conflito) =====
-
+  // ── TELA CADASTRO (usuário) ────────────────────────────────────
   avatarWrapper: {
     alignItems: 'center',
     marginBottom: 14,
   },
-
   avatarBox: {
     width: 72,
     height: 72,
@@ -166,19 +570,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   tagline: {
     textAlign: 'center',
     color: 'rgba(240,244,255,0.55)',
     fontSize: 13,
     marginBottom: 20,
   },
-
   taglineHighlight: {
     color: Colors.accent,
     fontWeight: '700',
   },
-
   card: {
     backgroundColor: 'rgba(255,255,255,0.07)',
     borderWidth: 1,
@@ -186,13 +587,191 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 18,
   },
-
   cardTitle: {
     color: '#fff',
     textAlign: 'center',
     marginBottom: 16,
     fontWeight: '700',
   },
+
+  // ── TELA HISTÓRICO ─────────────────────────────────────────────
+  container_principal: {
+    flex: 1,
+    backgroundColor: '#0a0f1d',
+    alignItems: 'center',
+    paddingTop: 50,
+  },
+  botaoVoltar: {
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    zIndex: 10,
+  },
+  textoTeatro: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#FFF',
+    marginBottom: 30,
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+  },
+  tituloSecao: {
+    color: '#FFF',
+    fontSize: 18,
+    fontWeight: '800',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  containerAvatar: {
+    position: 'relative',
+    marginBottom: 30,
+  },
+  imagem: {
+    width: 130,
+    height: 130,
+    borderRadius: 65,
+    borderWidth: 2,
+    borderColor: '#1e49e2',
+  },
+  botaoCamera: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
+    backgroundColor: '#1e49e2',
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#0a0f1d',
+  },
+  cardAvaliacao: {
+    width: '90%',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    borderRadius: 25,
+    padding: 20,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.15)',
+    marginBottom: 20,
+  },
+  cardHistorico: {
+    width: '90%',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    borderRadius: 20,
+    padding: 18,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: 15,
+    marginBottom: 15,
+    paddingHorizontal: 15,
+    width: '100%',
+    height: 55,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  iconInput: {
+    marginRight: 10,
+  },
+  caixaInput: {
+    flex: 1,
+    color: '#FFF',
+    fontSize: 14,
+  },
+  botaoEditar: {
+    backgroundColor: '#1e49e2',
+    width: '100%',
+    height: 55,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    elevation: 10,
+    shadowColor: '#1e49e2',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.6,
+    shadowRadius: 10,
+  },
+  textoBotao: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+    letterSpacing: 1,
+  },
+  containerTeatro: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  molduraImagem: {
+    width: 220,
+    height: 140,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(30, 73, 226, 0.1)',
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: '#1e49e2',
+    marginBottom: 15,
+  },
+  textoTeatroHeader: {
+    color: '#FFF',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  headerCard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  nomeUsuario: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  rowEstrelas: {
+    flexDirection: 'row',
+    gap: 3,
+  },
+  caixaComentario: {
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    borderRadius: 15,
+    padding: 12,
+  },
+  textoComentario: {
+    color: '#CCC',
+    fontSize: 14,
+    fontStyle: 'italic',
+    lineHeight: 20,
+  },
+  ouEntreCom: {
+    color: '#666',
+    marginTop: 25,
+    marginBottom: 15,
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  rowBotoes: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 15,
+    width: '100%',
+  },
+  botaoSocial: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
-export { styles, Colors };
+export default styles;

@@ -12,7 +12,7 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { styles, Colors } from '../Styles';
 
-export default function TelaCadastroScreen({ navigation }) {
+export default function TelaCadastro({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
@@ -34,7 +34,8 @@ export default function TelaCadastroScreen({ navigation }) {
       return;
     }
 
-    Alert.alert('Sucesso', `Conta criada para ${email}`);
+    const tipoLogin = tipoConta === 'ADM' ? 'admin' : 'visitante';
+    navigation.navigate('FeedPrincipal', { tipoLogin, usuario: email });
   };
 
   return (
@@ -120,7 +121,6 @@ export default function TelaCadastroScreen({ navigation }) {
           <View style={styles.chipsRow}>
             {['ADM', 'Visitante'].map((tipo) => {
               const isActive = tipoConta === tipo;
-
               return (
                 <TouchableOpacity
                   key={tipo}
@@ -141,10 +141,15 @@ export default function TelaCadastroScreen({ navigation }) {
             })}
           </View>
 
-          {/* Botão */}
+          {/* Botão Cadastrar */}
           <TouchableOpacity style={styles.btnGreen} onPress={handleCadastrar}>
             <MaterialCommunityIcons name="check" size={18} color="#fff" />
             <Text style={styles.btnGreenText}> Cadastrar</Text>
+          </TouchableOpacity>
+
+          {/* Voltar para login */}
+          <TouchableOpacity style={styles.btnOutline} onPress={() => navigation.goBack()}>
+            <Text style={styles.btnOutlineText}>Já tenho conta</Text>
           </TouchableOpacity>
         </View>
 

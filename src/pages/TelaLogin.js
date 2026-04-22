@@ -10,10 +10,18 @@ import {
   Platform,
 } from 'react-native';
 
-export default function LoginScreen({ navigation }) {
+export default function TelaLogin({ navigation }) {
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [tipoLogin, setTipoLogin] = useState('visitante');
+
+  const handleEntrar = () => {
+    navigation.navigate('FeedPrincipal', { tipoLogin, usuario: usuario || 'Visitante' });
+  };
+
+  const handleCadastro = () => {
+    navigation.navigate('Cadastro');
+  };
 
   return (
     <ImageBackground
@@ -65,7 +73,7 @@ export default function LoginScreen({ navigation }) {
             </View>
 
             {/* BOTÃO ENTRAR */}
-            <TouchableOpacity style={styles.btnPrimary}>
+            <TouchableOpacity style={styles.btnPrimary} onPress={handleEntrar}>
               <Text style={styles.btnPrimaryText}>ENTRAR</Text>
             </TouchableOpacity>
 
@@ -91,19 +99,15 @@ export default function LoginScreen({ navigation }) {
             {/* DIVISOR */}
             <View style={styles.divisorRow}>
               <View style={styles.divisorLinha} />
-              <Text style={styles.divisorTexto}>Ou entre com</Text>
+              <Text style={styles.divisorTexto}>Ou</Text>
               <View style={styles.divisorLinha} />
             </View>
 
-            {/* BOTÕES SOCIAIS */}
-            <View style={styles.sociaisRow}>
-              <TouchableOpacity style={[styles.btnSocial, { backgroundColor: '#1877f2' }]}>
-                <Text style={styles.btnSocialText}>f</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.btnSocial, { backgroundColor: '#ea4335' }]}>
-                <Text style={styles.btnSocialText}>G</Text>
-              </TouchableOpacity>
-            </View>
+            {/* BOTÃO CADASTRO */}
+            <TouchableOpacity style={styles.btnCadastro} onPress={handleCadastro}>
+              <Text style={styles.btnCadastroText}>Criar nova conta</Text>
+            </TouchableOpacity>
+
           </View>
 
         </KeyboardAvoidingView>
@@ -113,168 +117,63 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  bgImage: {
-    flex: 1,
-  },
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(4,10,25,0.88)',
-  },
-  inner: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 24,
-  },
+  bgImage: { flex: 1 },
+  overlay: { flex: 1, backgroundColor: 'rgba(4,10,25,0.88)' },
+  inner: { flex: 1, justifyContent: 'center', padding: 24 },
 
-  // LOGO
-  logoArea: {
-    alignItems: 'center',
-    marginBottom: 28,
-  },
+  logoArea: { alignItems: 'center', marginBottom: 28 },
   logoIcon: {
-    width: 54,
-    height: 54,
-    borderRadius: 18,
+    width: 54, height: 54, borderRadius: 18,
     backgroundColor: 'rgba(37,99,235,0.4)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
+    borderWidth: 1, borderColor: 'rgba(255,255,255,0.2)',
+    alignItems: 'center', justifyContent: 'center', marginBottom: 10,
   },
-  logoEmoji: {
-    fontSize: 26,
-  },
-  logoTitulo: {
-    color: '#f0f4ff',
-    fontSize: 16,
-    fontWeight: '800',
-    letterSpacing: 2,
-  },
-  logoSubtitulo: {
-    color: 'rgba(240,244,255,0.55)',
-    fontSize: 12,
-    marginTop: 4,
-  },
+  logoEmoji: { fontSize: 26 },
+  logoTitulo: { color: '#f0f4ff', fontSize: 16, fontWeight: '800', letterSpacing: 2 },
+  logoSubtitulo: { color: 'rgba(240,244,255,0.55)', fontSize: 12, marginTop: 4 },
 
-  // CARD
   card: {
     backgroundColor: 'rgba(255,255,255,0.07)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.13)',
-    borderRadius: 22,
-    padding: 20,
-    gap: 12,
+    borderWidth: 1, borderColor: 'rgba(255,255,255,0.13)',
+    borderRadius: 22, padding: 20, gap: 12,
   },
-  cardTitulo: {
-    color: '#f0f4ff',
-    fontSize: 16,
-    fontWeight: '700',
-    textAlign: 'center',
-    marginBottom: 4,
-  },
+  cardTitulo: { color: '#f0f4ff', fontSize: 16, fontWeight: '700', textAlign: 'center', marginBottom: 4 },
 
-  // INPUT
   inputRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'row', alignItems: 'center',
     backgroundColor: 'rgba(255,255,255,0.09)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.15)',
-    borderRadius: 14,
-    paddingHorizontal: 14,
-    paddingVertical: 11,
-    gap: 10,
+    borderWidth: 1, borderColor: 'rgba(255,255,255,0.15)',
+    borderRadius: 14, paddingHorizontal: 14, paddingVertical: 11, gap: 10,
   },
-  inputIcon: {
-    fontSize: 14,
-  },
-  input: {
-    flex: 1,
-    color: '#f0f4ff',
-    fontSize: 13,
-  },
+  inputIcon: { fontSize: 14 },
+  input: { flex: 1, color: '#f0f4ff', fontSize: 13 },
 
-  // BOTÃO PRIMÁRIO
   btnPrimary: {
-    backgroundColor: '#2563eb',
-    borderRadius: 14,
-    padding: 13,
-    alignItems: 'center',
-    shadowColor: '#2563eb',
-    shadowOpacity: 0.45,
-    shadowRadius: 12,
-    elevation: 6,
+    backgroundColor: '#2563eb', borderRadius: 14, padding: 13, alignItems: 'center',
+    shadowColor: '#2563eb', shadowOpacity: 0.45, shadowRadius: 12, elevation: 6,
   },
-  btnPrimaryText: {
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: 13,
-    letterSpacing: 1,
-  },
+  btnPrimaryText: { color: '#fff', fontWeight: '700', fontSize: 13, letterSpacing: 1 },
 
-  // TIPO DE LOGIN
-  tipoRow: {
-    flexDirection: 'row',
-    gap: 8,
-  },
+  tipoRow: { flexDirection: 'row', gap: 8 },
   btnTipo: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.25)',
-    borderRadius: 14,
-    padding: 9,
-    alignItems: 'center',
+    flex: 1, borderWidth: 1, borderColor: 'rgba(255,255,255,0.25)',
+    borderRadius: 14, padding: 9, alignItems: 'center',
   },
   btnTipoAtivo: {
     borderColor: 'rgba(56,189,248,0.5)',
     backgroundColor: 'rgba(37,99,235,0.2)',
   },
-  btnTipoText: {
-    color: 'rgba(255,255,255,0.8)',
-    fontSize: 11,
-    fontWeight: '600',
-  },
+  btnTipoText: { color: 'rgba(255,255,255,0.8)', fontSize: 11, fontWeight: '600' },
 
-  // ESQUECI SENHA
-  esqueciSenha: {
-    color: 'rgba(240,244,255,0.55)',
-    fontSize: 11,
-    textAlign: 'center',
-  },
+  esqueciSenha: { color: 'rgba(240,244,255,0.55)', fontSize: 11, textAlign: 'center' },
 
-  // DIVISOR
-  divisorRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  divisorLinha: {
-    flex: 1,
-    height: 1,
-    backgroundColor: 'rgba(255,255,255,0.1)',
-  },
-  divisorTexto: {
-    color: 'rgba(240,244,255,0.55)',
-    fontSize: 11,
-  },
+  divisorRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  divisorLinha: { flex: 1, height: 1, backgroundColor: 'rgba(255,255,255,0.1)' },
+  divisorTexto: { color: 'rgba(240,244,255,0.55)', fontSize: 11 },
 
-  // SOCIAIS
-  sociaisRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 12,
+  btnCadastro: {
+    borderRadius: 14, padding: 13, alignItems: 'center',
+    borderWidth: 1, borderColor: 'rgba(255,255,255,0.25)',
   },
-  btnSocial: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnSocialText: {
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: 14,
-  },
+  btnCadastroText: { color: 'rgba(255,255,255,0.8)', fontWeight: '600', fontSize: 13 },
 });

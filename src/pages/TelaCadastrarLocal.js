@@ -29,7 +29,7 @@ const IconImage = () => (
   />
 );
 
-export default function CadastrarLocalScreen({ navigation }) {
+export default function TelaCadastrarLocal({ navigation }) {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [localizacao, setLocalizacao] = useState('');
