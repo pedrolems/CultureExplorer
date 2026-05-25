@@ -1,0 +1,22 @@
+// Colors.js — sem imports, sem dependências circulares
+export const L = {
+  bg: '#080c14',
+  surface: 'rgba(255,255,255,0.07)',
+  border: 'rgba(255,255,255,0.12)',
+  blue: '#2563eb',
+  blueSoft: 'rgba(37,99,235,0.25)',
+  accent: '#38bdf8',
+  accentSoft: 'rgba(56,189,248,0.15)',
+  teal: '#0d9488',
+  purple: '#6366f1',
+  purpleSoft: 'rgba(99,102,241,0.25)',
+  green: '#10b981',
+  greenSoft: 'rgba(16,185,129,0.2)',
+  red: '#ef4444',
+  redSoft: 'rgba(239,68,68,0.15)',
+  star: '#f59e0b',
+  text: '#f0f4ff',
+  muted: 'rgba(240,244,255,0.5)',
+  hint: 'rgba(240,244,255,0.25)',
+  divider: 'rgba(255,255,255,0.08)',
+};
